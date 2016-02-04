@@ -14,17 +14,21 @@ public class Chat : NetworkBehaviour {
 	public void SendChat()
 	{
 		string currentMessage = chatInput.text;
-		chatHistory.Add (currentMessage);
 
+		Debug.Log (currentMessage);
+
+		CmdChatMessage(currentMessage);
+	}
+
+	private void UpdateChatHistory(string message)
+	{
+		chatHistory.Add (message);
 		string history = string.Empty;
 
 		foreach (string c in chatHistory) {
 			history = history + c + System.Environment.NewLine;
 		}
 		chatView.text = history;
-		Debug.Log (currentMessage);
-
-		CmdChatMessage(currentMessage);
 	}
 
 	//client to server -- called on server
@@ -32,7 +36,7 @@ public class Chat : NetworkBehaviour {
 	private void CmdChatMessage(string message)
 	{
 		RpcReceiveChatMessage(message);
-		chatHistory.Add(message);
+		UpdateChatHistory (message);
 	}
 
 	//server to client -- called on client
@@ -40,5 +44,6 @@ public class Chat : NetworkBehaviour {
 	void RpcReceiveChatMessage(string message)
 	{
 		chatHistory.Add(message);
+		UpdateChatHistory (message);
 	}
 }
