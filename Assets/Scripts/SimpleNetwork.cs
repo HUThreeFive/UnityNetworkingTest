@@ -14,7 +14,7 @@ using System.Collections;
 [RequireComponent (typeof (NetworkView))]
 public class SimpleNetwork : MonoBehaviour
 {
-	public string connectionIP = "127.0.0.1";	//Direct connect IP
+	public string connectionIP = "";	//Direct connect IP
 	public int connectionPort = 25001;				//Network Port
 	
 	public string playerName;
@@ -31,7 +31,7 @@ public class SimpleNetwork : MonoBehaviour
 	{
 		DontDestroyOnLoad(this);
 		sChat = GetComponent<SimpleChat>();
-		var ip = Network.player.ipAddress;
+		connectionIP = Network.player.ipAddress;
 	}
 	
 	void Update()
