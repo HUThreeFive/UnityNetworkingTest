@@ -31,6 +31,7 @@ public class SimpleNetwork : MonoBehaviour
 	{
 		DontDestroyOnLoad(this);
 		sChat = GetComponent<SimpleChat>();
+		var ip = Network.player.ipAddress;
 	}
 	
 	void Update()
